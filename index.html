@@ -1,1 +1,505 @@
-hello world
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="DHK projects, research, and open-source tools for making AI-assisted work more useful, legible, and accountable.">
+  <meta name="theme-color" content="#f5f6fa">
+  <title>DHK — Projects, research, and working systems</title>
+  <style>
+    :root {
+      --bg: #f5f6fa;
+      --bg2: #eceef5;
+      --bg3: #e0e3f0;
+      --border: #c8cde0;
+      --border-light: #d8dbeb;
+      --text: #0d0f1a;
+      --text-muted: #2a2d42;
+      --text-dim: #5a5d78;
+      --accent: #2b50e8;
+      --accent-hover: #1a3bd4;
+      --accent-purple: #8b2adc;
+      --accent-orange: #e05c2a;
+      --accent-teal: #0ea5b0;
+      --font-sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --font-mono: 'DM Mono', monospace;
+      --sp1: 4px;
+      --sp2: 8px;
+      --sp3: 12px;
+      --sp4: 16px;
+      --sp5: 24px;
+      --sp6: 32px;
+      --sp7: 48px;
+      --sp8: 64px;
+      --sp9: 80px;
+      --sp10: 96px;
+      --sp11: 128px;
+      --max-width: 1200px;
+      --header-height: 56px;
+      --radius: 4px;
+      --motion-fast: 0.15s;
+      --motion-reveal: 1s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--text-muted);
+      background: var(--bg);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.75;
+    }
+
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    :focus:not(:focus-visible) { outline: none; }
+
+    .skip-link {
+      position: fixed;
+      z-index: 20;
+      top: var(--sp2);
+      left: var(--sp2);
+      padding: var(--sp3) var(--sp5);
+      color: var(--bg);
+      background: var(--accent);
+      border-radius: var(--radius);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transform: translateY(-200%);
+    }
+
+    .skip-link:focus { transform: translateY(0); }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      padding-inline: var(--sp5);
+      margin-inline: auto;
+    }
+
+    .site-header {
+      position: sticky;
+      z-index: 10;
+      top: 0;
+      height: var(--header-height);
+      background: rgb(245 246 250 / 92%);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+    }
+
+    .header-inner {
+      display: flex;
+      height: 100%;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--sp5);
+    }
+
+    .wordmark {
+      display: flex;
+      align-items: center;
+      gap: var(--sp2);
+      color: var(--text);
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .wordmark::before {
+      width: 7px;
+      height: 7px;
+      background: var(--accent);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: var(--sp5);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .nav-link {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      color: var(--text-dim);
+      border-bottom: 2px solid transparent;
+      text-decoration: none;
+      transition: color var(--motion-fast), border-color var(--motion-fast);
+    }
+
+    .nav-link:hover { color: var(--text); border-color: var(--accent); }
+    .nav-link.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+    main { display: grid; gap: 0; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(240px, 1fr);
+      gap: var(--sp9);
+      align-items: end;
+      padding-block: var(--sp9);
+    }
+
+    .hero-copy { display: grid; gap: var(--sp4); }
+    .eyebrow, .meta, .tag, .section-label {
+      font-family: var(--font-mono);
+      font-weight: 400;
+    }
+
+    .eyebrow, .section-label, .tag {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow { color: var(--accent); }
+
+    h1, h2, h3, p { margin: 0; }
+
+    h1 {
+      max-width: 820px;
+      color: var(--text);
+      font-size: clamp(42px, 5vw, 64px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    h2 {
+      color: var(--text);
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+    }
+
+    h3 {
+      color: var(--text);
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .lede { max-width: 720px; font-size: 17px; color: var(--text-dim); }
+
+    .orientation {
+      display: grid;
+      gap: var(--sp2);
+      padding: var(--sp5);
+      background: var(--bg2);
+      border-left: 2px solid var(--accent);
+      border-radius: var(--radius);
+    }
+
+    .orientation strong { color: var(--text); font-weight: 600; }
+    .orientation p { font-size: 14px; line-height: 1.6; }
+
+    .section { display: grid; gap: var(--sp6); }
+
+    .section-divider {
+      display: flex;
+      gap: var(--sp4);
+      align-items: center;
+      padding: var(--sp7) 0 var(--sp6);
+      border-top: 1px solid var(--border);
+    }
+
+    .section-divider::after {
+      height: 1px;
+      flex: 1;
+      background: var(--border);
+      content: "";
+    }
+
+    .section-label { color: var(--text-dim); }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(240px, 1fr);
+      gap: var(--sp7);
+      align-items: start;
+    }
+
+    .section-note { font-size: 14px; line-height: 1.6; }
+
+    .primary-link {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: var(--sp5);
+      align-items: center;
+      padding: var(--sp6);
+      color: var(--bg);
+      background: var(--accent);
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: opacity var(--motion-fast);
+    }
+
+    .primary-link:hover { opacity: 0.85; }
+    .primary-link:focus-visible { outline-offset: 3px; }
+    .primary-content { display: grid; gap: var(--sp2); }
+    .primary-link .tag, .primary-link h2, .primary-link p { color: var(--bg); }
+    .primary-link p { font-size: 15px; }
+    .arrow { font-family: var(--font-mono); font-size: 20px; }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      background: var(--border);
+      gap: 1px;
+    }
+
+    .card {
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      gap: var(--sp3);
+      min-height: 248px;
+      padding: var(--sp5);
+      color: inherit;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      transition: background var(--motion-fast), border-color var(--motion-fast);
+    }
+
+    .card:hover { background: var(--bg3); }
+    .card:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; background: var(--bg3); }
+    .card p { font-size: 14px; line-height: 1.6; }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--sp3);
+      align-items: center;
+    }
+
+    .tag {
+      width: fit-content;
+      padding: var(--sp1) var(--sp2);
+      color: var(--accent-orange);
+      background: rgb(224 92 42 / 10%);
+      border-radius: var(--radius);
+    }
+
+    .tag-tool { color: var(--accent-purple); background: rgb(139 42 220 / 10%); }
+    .tag-study { color: var(--accent-teal); background: rgb(14 165 176 / 10%); }
+
+    .meta {
+      color: var(--text-dim);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+    }
+
+    .status-live::before {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      margin-right: var(--sp2);
+      background: var(--accent);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .card-follow {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--sp3);
+      align-items: end;
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .repo-groups { display: grid; gap: var(--sp8); }
+    .repo-group { display: grid; gap: var(--sp4); }
+
+    .group-heading {
+      display: flex;
+      gap: var(--sp3);
+      align-items: baseline;
+    }
+
+    .group-heading h3 { font-size: 20px; }
+    .group-heading .meta { text-transform: uppercase; letter-spacing: 0.08em; }
+
+    .site-footer {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--sp5);
+      padding-block: var(--sp8);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+    }
+
+    .site-footer a { color: var(--accent); }
+    .site-footer a:hover { color: var(--accent-hover); }
+
+    @media (max-width: 1024px) {
+      .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 640px) {
+      .container { padding-inline: var(--sp4); }
+      .header-inner { align-items: stretch; }
+      .nav { overflow-x: auto; gap: var(--sp4); }
+      .hero, .section-heading { grid-template-columns: 1fr; }
+      .hero { gap: var(--sp7); padding-block: var(--sp8); }
+      .card-grid { grid-template-columns: 1fr; }
+      .card { min-height: 220px; }
+      .primary-link { padding: var(--sp5); }
+      .site-footer { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    @media print {
+      :root { --bg: #fff; --bg2: #fff; --bg3: #fff; }
+      header, footer, nav, .no-print { display: none; }
+      body { color: #000; font-size: 11pt; }
+      a { color: #000; text-decoration: underline; }
+      a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 10pt; }
+      h2, h3 { break-after: avoid; }
+      .card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="wordmark" href="/" aria-label="DHK home">dhk</a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="nav-link active" href="#live">Live work</a>
+        <a class="nav-link" href="#repositories">Repositories</a>
+        <a class="nav-link" href="https://github.com/dhk">GitHub ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="container hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Projects · research · working systems</p>
+        <h1>Making useful work legible.</h1>
+        <p class="lede">Open-source tools and experiments for understanding how people and AI think, decide, review, and build together.</p>
+      </div>
+      <aside class="orientation">
+        <strong>Start anywhere.</strong>
+        <p>Visit the main site for writing and consulting, use a live project, or inspect the source.</p>
+      </aside>
+    </section>
+
+    <section class="container section" aria-labelledby="main-site-title">
+      <div class="section-divider"><span class="section-label">Main site</span></div>
+      <a class="primary-link" href="https://www.dhk.io">
+        <div class="primary-content">
+          <span class="tag">Writing and consulting</span>
+          <h2 id="main-site-title">www.dhk.io</h2>
+          <p>Writing, consulting, and the broader argument behind this work.</p>
+        </div>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+    </section>
+
+    <section class="container section" id="live" aria-labelledby="live-title">
+      <div class="section-divider"><span class="section-label">Explore</span></div>
+      <div class="section-heading">
+        <h2 id="live-title">Live work</h2>
+        <p class="section-note">Public browser-based projects. No local setup required.</p>
+      </div>
+      <div class="card-grid">
+        <a class="card" href="https://dhk.github.io/skill-map/">
+          <div class="card-meta"><span class="tag tag-study">Study</span><span class="meta status-live">Live</span></div>
+          <h3>The Skill Map</h3>
+          <p>An interactive map of nearly 5,000 agent skills—and the gaps that show what the ecosystem has not built.</p>
+          <div class="card-follow"><span>Open the map</span><span>↗</span></div>
+        </a>
+        <a class="card" href="https://dhk.github.io/praxis/">
+          <div class="card-meta"><span class="tag tag-tool">Tool</span><span class="meta status-live">Live</span></div>
+          <h3>Praxis</h3>
+          <p>A browser-based viewer for transparent document transformation. Observe, recommend, transform, validate, and inspect every artifact.</p>
+          <div class="card-follow"><span>Use the viewer</span><span>↗</span></div>
+        </a>
+        <a class="card" href="https://dhk.github.io/tricorder/explorer/">
+          <div class="card-meta"><span class="tag tag-study">Study</span><span class="meta status-live">Live</span></div>
+          <h3>Tricorder Explorer</h3>
+          <p>What code-review history reveals about expertise, recurring standards, blind spots, and institutional knowledge.</p>
+          <div class="card-follow"><span>Explore the findings</span><span>↗</span></div>
+        </a>
+      </div>
+    </section>
+
+    <section class="container section" id="repositories" aria-labelledby="repos-title">
+      <div class="section-divider"><span class="section-label">Build on it</span></div>
+      <div class="section-heading">
+        <h2 id="repos-title">Selected repositories</h2>
+        <p class="section-note">Public projects with a clear problem, a useful artifact, or an idea worth carrying forward. Status varies; each repository states what is ready.</p>
+      </div>
+
+      <div class="repo-groups">
+        <section class="repo-group" aria-labelledby="tools-title">
+          <div class="group-heading"><h3 id="tools-title">Tools for working systems</h3><span class="meta">Use and adapt</span></div>
+          <div class="card-grid">
+            <a class="card" href="https://github.com/dhk/work-ledger"><span class="tag tag-tool">Local analytics</span><h3>work-ledger</h3><p>Personal Claude Code usage analytics that attributes cost to the sessions, prompts, skills, and agents that caused it.</p><div class="card-follow"><span>View repository</span><span>↗</span></div></a>
+            <a class="card" href="https://github.com/dhk/tricorder"><span class="tag tag-tool">Team learning</span><h3>tricorder</h3><p>Turns code-review history into an evidence-backed map of team knowledge, review patterns, blind spots, and improvement opportunities.</p><div class="card-follow"><span>View repository</span><span>↗</span></div></a>
+            <a class="card" href="https://github.com/dhk/praxis"><span class="tag tag-tool">Document systems</span><h3>praxis</h3><p>A reference architecture and executable harness for auditable document transformation pipelines.</p><div class="card-follow"><span>View repository</span><span>↗</span></div></a>
+            <a class="card" href="https://github.com/dhk/woven"><span class="tag tag-tool">Network analysis</span><h3>woven</h3><p>Combines LinkedIn exports to find the warmest introduction path through a shared professional network. All analysis stays in the browser.</p><div class="card-follow"><span>View repository</span><span>↗</span></div></a>
+          </div>
+        </section>
+
+        <section class="repo-group" aria-labelledby="research-title">
+          <div class="group-heading"><h3 id="research-title">Research infrastructure</h3><span class="meta">Evidence before synthesis</span></div>
+          <div class="card-grid">
+            <a class="card" href="https://github.com/dhk/skill-map"><span class="tag tag-study">Ecosystem study</span><h3>skill-map</h3><p>The crawler, corpus, analysis, and interactive map behind a study of 4,975 agent skills across 43 repositories.</p><div class="card-follow"><span>View repository</span><span>↗</span></div></a>
+            <a class="card" href="https://github.com/dhk/alexandria"><span class="tag tag-study">Research corpus</span><h3>alexandria</h3><p>A durable, auditable record of multi-model research: briefs, raw outputs, claims, disagreement, synthesis, and publication.</p><div class="card-follow"><span>View repository</span><span>↗</span></div></a>
+            <a class="card" href="https://github.com/dhk/minority-report"><span class="tag tag-tool">Model orchestration</span><h3>minority-report</h3><p>Dispatches one research brief to independent models, preserves their evidence, and grades the resulting claim landscape.</p><div class="card-follow"><span>View repository</span><span>↗</span></div></a>
+          </div>
+        </section>
+
+        <section class="repo-group" aria-labelledby="lineage-title">
+          <div class="group-heading"><h3 id="lineage-title">Ideas under pressure</h3><span class="meta">Trace how thinking changes</span></div>
+          <div class="card-grid">
+            <a class="card" href="https://github.com/dhk/crucible"><span class="tag tag-tool">Agentic review</span><h3>crucible</h3><p>A Git-native debate engine for durable work, using structured strawman, steelman, and adversarial review cycles.</p><div class="card-follow"><span>View repository</span><span>↗</span></div></a>
+            <a class="card" href="https://github.com/dhk/fossil"><span class="tag tag-tool">Concept lineage</span><h3>fossil</h3><p>Turns a repository into an interactive archaeology of its thinking, tracing how prompts, skills, and design decisions evolve.</p><div class="card-follow"><span>View repository</span><span>↗</span></div></a>
+            <a class="card" href="https://github.com/dhk/adventures-in-ai"><span class="tag">Case studies</span><h3>adventures-in-ai</h3><p>Experiments, research trails, case studies, and artifacts from building with AI in practice.</p><div class="card-follow"><span>View repository</span><span>↗</span></div></a>
+          </div>
+        </section>
+
+        <section class="repo-group" aria-labelledby="early-title">
+          <div class="group-heading"><h3 id="early-title">Early experiments</h3><span class="meta">Working, not finished</span></div>
+          <div class="card-grid">
+            <a class="card" href="https://github.com/dhk/voice-inbox"><span class="tag">Audio</span><h3>voice-inbox</h3><p>A high-fidelity transcription design that uses model disagreement to resolve ambiguity while preserving genuine uncertainty.</p><div class="card-follow"><span>View repository</span><span>↗</span></div></a>
+            <a class="card" href="https://github.com/dhk/walletwallet-mcp"><span class="tag tag-tool">MCP</span><h3>walletwallet-mcp</h3><p>A small remote MCP server for creating and updating Apple and Google Wallet passes through the WalletWallet API.</p><div class="card-follow"><span>View repository</span><span>↗</span></div></a>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container site-footer">
+    <span>Built in the open. Curated by hand.</span>
+    <span><a href="https://www.dhk.io">dhk.io</a> · <a href="https://github.com/dhk">GitHub</a></span>
+  </footer>
+</body>
+</html>
