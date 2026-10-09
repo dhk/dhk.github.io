@@ -256,7 +256,6 @@
     .card-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      background: var(--border);
       gap: 1px;
     }
 
@@ -269,6 +268,7 @@
       color: inherit;
       background: var(--bg);
       border-bottom: 1px solid var(--border);
+      box-shadow: 0 0 0 1px var(--border);
       text-decoration: none;
       transition: background var(--motion-fast), border-color var(--motion-fast);
     }
@@ -307,6 +307,16 @@
       height: 7px;
       margin-right: var(--sp2);
       background: var(--accent);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .status-beta::before {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      margin-right: var(--sp2);
+      background: var(--accent-orange);
       border-radius: 50%;
       content: "";
     }
@@ -447,6 +457,12 @@
           <p>What code-review history reveals about expertise, recurring standards, blind spots, and institutional knowledge.</p>
           <div class="card-follow"><span>Explore the findings</span><span>↗</span></div>
         </a>
+        <a class="card" href="https://dhk.github.io/tricorder/beta/">
+          <div class="card-meta"><span class="tag tag-tool">Tool</span><span class="meta status-beta">Beta</span></div>
+          <h3>Impact Advocate</h3>
+          <p>An agent skill that turns your own GitHub record into an evidence-led impact or promotion packet. Runs inside your own Claude session; every claim linked or counted.</p>
+          <div class="card-follow"><span>Join the beta</span><span>↗</span></div>
+        </a>
       </div>
     </section>
 
@@ -463,9 +479,7 @@
           <div class="card-grid">
             <a class="card" href="https://github.com/dhk/work-ledger"><span class="tag tag-tool">Local analytics</span><h3>work-ledger</h3><p>Personal Claude Code usage analytics that attributes cost to the sessions, prompts, skills, and agents that caused it.</p><div class="card-follow"><span>View repository</span><span>↗</span></div></a>
             <a class="card" href="https://github.com/dhk/tricorder"><span class="tag tag-tool">Team learning</span><h3>tricorder</h3><p>Turns code-review history into an evidence-backed map of team knowledge, review patterns, blind spots, and improvement opportunities.</p><div class="card-follow"><span>View repository</span><span>↗</span></div></a>
-            <a class="card" href="https://github.com/dhk/praxis"><span class="tag tag-tool">Document systems</span><h3>praxis</h3><p>A reference architecture and executable harness for auditable document transformation pipelines.</p><div class="card-follow"><span>View repository</span><span>↗</span></div></a>
-            <a class="card" href="https://github.com/dhk/woven"><span class="tag tag-tool">Network analysis</span><h3>woven</h3><p>Combines LinkedIn exports to find the warmest introduction path through a shared professional network. All analysis stays in the browser.</p><div class="card-follow"><span>View repository</span><span>↗</span></div></a>
-          </div>
+            <a class="card" href="https://github.com/dhk/praxis"><span class="tag tag-tool">Document systems</span><h3>praxis</h3><p>A reference architecture and executable harness for auditable document transformation pipelines.</p><div class="card-follow"><span>View repository</span><span>↗</span></div></a>          </div>
         </section>
 
         <section class="repo-group" aria-labelledby="research-title">
@@ -480,9 +494,7 @@
         <section class="repo-group" aria-labelledby="lineage-title">
           <div class="group-heading"><h3 id="lineage-title">Ideas under pressure</h3><span class="meta">Trace how thinking changes</span></div>
           <div class="card-grid">
-            <a class="card" href="https://github.com/dhk/crucible"><span class="tag tag-tool">Agentic review</span><h3>crucible</h3><p>A Git-native debate engine for durable work, using structured strawman, steelman, and adversarial review cycles.</p><div class="card-follow"><span>View repository</span><span>↗</span></div></a>
-            <a class="card" href="https://github.com/dhk/fossil"><span class="tag tag-tool">Concept lineage</span><h3>fossil</h3><p>Turns a repository into an interactive archaeology of its thinking, tracing how prompts, skills, and design decisions evolve.</p><div class="card-follow"><span>View repository</span><span>↗</span></div></a>
-            <a class="card" href="https://github.com/dhk/adventures-in-ai"><span class="tag">Case studies</span><h3>adventures-in-ai</h3><p>Experiments, research trails, case studies, and artifacts from building with AI in practice.</p><div class="card-follow"><span>View repository</span><span>↗</span></div></a>
+            <a class="card" href="https://github.com/dhk/crucible"><span class="tag tag-tool">Agentic review</span><h3>crucible</h3><p>A Git-native debate engine for durable work, using structured strawman, steelman, and adversarial review cycles.</p><div class="card-follow"><span>View repository</span><span>↗</span></div></a>            <a class="card" href="https://github.com/dhk/adventures-in-ai"><span class="tag">Case studies</span><h3>adventures-in-ai</h3><p>Experiments, research trails, case studies, and artifacts from building with AI in practice.</p><div class="card-follow"><span>View repository</span><span>↗</span></div></a>
           </div>
         </section>
 
