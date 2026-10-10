@@ -256,8 +256,14 @@
     .card-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
+      background: var(--border);
       gap: 1px;
     }
+
+    /* Border-gap grid: the last card in an incomplete row fills it, so no
+       --border-coloured hole shows. 3 columns here; 2 and 1 below. */
+    .card-grid > .card:last-child:nth-child(3n+1) { grid-column: 1 / -1; }
+    .card-grid > .card:last-child:nth-child(3n+2) { grid-column: span 2; }
 
     .card {
       display: grid;
@@ -268,7 +274,6 @@
       color: inherit;
       background: var(--bg);
       border-bottom: 1px solid var(--border);
-      box-shadow: 0 0 0 1px var(--border);
       text-decoration: none;
       transition: background var(--motion-fast), border-color var(--motion-fast);
     }
@@ -316,7 +321,7 @@
       width: 7px;
       height: 7px;
       margin-right: var(--sp2);
-      background: var(--accent-orange);
+      border: 1px solid var(--accent);
       border-radius: 50%;
       content: "";
     }
@@ -360,6 +365,8 @@
 
     @media (max-width: 1024px) {
       .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .card-grid > .card:last-child:nth-child(n) { grid-column: auto; }
+      .card-grid > .card:last-child:nth-child(odd) { grid-column: 1 / -1; }
     }
 
     @media (max-width: 640px) {
@@ -369,6 +376,7 @@
       .hero, .section-heading { grid-template-columns: 1fr; }
       .hero { gap: var(--sp7); padding-block: var(--sp8); }
       .card-grid { grid-template-columns: 1fr; }
+      .card-grid > .card:last-child:nth-child(n) { grid-column: auto; }
       .card { min-height: 220px; }
       .primary-link { padding: var(--sp5); }
       .site-footer { flex-direction: column; }
